@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %} 
+{% include "nav.html" %}
+<title>
+	Results
+</title>
+<img class="Myimage1" src = "{% static '/ser.png' %}"/>
+<div class="main1">
+<link rel="stylesheet" href="{% static '/css/w3.css' %}">
+<h1>Results</h1>
+<table class="w3-table-all w3-centered">
+<tr>
+    <th>Name</th>
+    <th>Score</th>
+    <th>Time taken</th>
+    <th>Submitted</th>
+</tr>
+{% for i in res %}
+<tr>
+	<td>{{i.name}} </td>
+	<td> {{i.score}}/100</td>
+	<td> {{i.time}}secs </td>
+	<td> {{i.created}} </td>
+</tr>
+{% endfor %}
+</div>
+{% endblock %}

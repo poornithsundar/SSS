@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %} 
+{% include "nav.html" %}
+<title>
+  Please Wait....
+</title>
+<body>
+<div class="vision">
+<p>{{profile}}</p>
+<div class="row begin-countdown">
+  <div class="col-md-12 text-center">
+    <progress value="10" max="10" id="pageBeginCountdown"></progress>
+    <p> Begining in <span id="pageBeginCountdownText">10 </span> seconds</p>
+  </div>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+ProgressCountdown(10, 'pageBeginCountdown', 'pageBeginCountdownText').then(value => Redirect())
+
+function ProgressCountdown(timeleft, bar, text) {
+  return new Promise((resolve, reject) => {
+    var countdownTimer = setInterval(() => {
+      timeleft--;
+
+      document.getElementById(bar).value = timeleft;
+      document.getElementById(text).textContent = timeleft;
+
+      if (timeleft <= 0) {
+        clearInterval(countdownTimer);
+        resolve(true);
+      }
+    }, 1000);
+  });
+}
+function Redirect() {
+               window.location = "/quiz";
+            }
+</script>
+{% endblock %}

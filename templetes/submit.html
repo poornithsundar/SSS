@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% csrf_token %}
+{% block content %}
+{% include "nav.html" %}
+<title>
+	Submit
+</title>
+<body>
+<div class="vision">
+<p>Saved successfully</p><br>
+<p>SCORE:{{score}}</p><br>
+<p>TIME:{{time}}</p><br>
+</div>
+</body>
+{% endblock %}

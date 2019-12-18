@@ -1,0 +1,21 @@
+<html>
+<head>
+{% load static %}
+</head>
+{% include "style.html" %}
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: right;
+}
+</style>
+<body>
+{% block content %} 
+{% endblock %}
+<footer class="footer">&copy; Copyright 2019 <br> T Poornith Sundar</footer>
+</body>
+</html>

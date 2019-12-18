@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %} 
+{% include "nav.html" %}
+<title>
+	Exam
+</title>
+<script>
+function myFunction() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+<body onload="myFunction()">
+<img class="Myimage1" src = "{% static '/ser.png' %}"/>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div id="snackbar"><li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li></div>
+    {% endfor %}
+{% endif %}
+</ul>
+<div class="vision">
+	<a href='/countdown'><button class='button'>START TEST</button></a>
+</div>
+</body>
+{% endblock %}

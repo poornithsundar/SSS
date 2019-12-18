@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %} 
+{% include "nav.html" %}
+<title>
+	Home
+</title>
+<script>
+function myFunction() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+</script>
+<body onload="myFunction()">
+<img class="Myimage1" src = "{% static '/ser.png' %}"/>
+<div class="vision">
+<h1>Vision of SSS</h1>
+<p>It is our vision to bring more quality in education by using Advanced Computer Technologies. Our Spot Value Examination which enable the students to not only showcase their talents and also useful to better preparation for the competitions/Examinations.</p>
+</div>
+<div class="vision1">
+<a href="/index"><h1>Products and Services</h1></a>
+</div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div id="snackbar"><li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li></div>
+    {% endfor %}
+</ul>
+{% endif %} 
+{% endblock %}

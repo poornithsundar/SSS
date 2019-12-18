@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %} 
+{% include "nav.html" %}
+<title>
+	Contact Us
+</title>
+<img class="Myimage1" src = "{% static '/ser.png' %}"/>
+<div class='text'>
+<h1>Contact us</h1>
+<p>Door.No.9-76 , <br>Opp.Parameswara Provisional Stores, <br>Sri Mallikarjuna Swamy Devastanam Road, <br>Sharada Nagar, Ramanthapur, <br>Hyderabad-500013, <br>Telangana, India<br></p>
+<p>Email id : thotasundararao@gmail.com<br>
+Phone no : 7207828656</p>
+<p>
+	<button id="myButton" class="button" style="vertical-align:middle"><span>GET DIRECTIONS</span></button>
+	<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "https://www.google.co.in/maps/dir//17.3956192,78.5366256/@17.3954897,78.5343414,17z";
+    };
+</script>
+	</p>
+</div>
+{% endblock %}

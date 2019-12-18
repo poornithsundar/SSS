@@ -1,0 +1,512 @@
+<style> 
+{% load static %}
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Exo", sans-serif;
+  background: linear-gradient(-45deg, #FF00FF, #00FFFF, #D8BFD8, #008080);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+html {
+        overflow: auto;
+
+}
+.bg-image {
+  position: relative;
+  background-image: url("{% static '/bg.jpg' %}");
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  height: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#mySidenav .aa {
+  position: absolute; /* Position them relative to the browser window */
+  right: -80px; /* Position them outside of the screen */
+  transition: 0.3s;
+  text-align: right;
+  padding: 15px; /* 15px padding */
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 5px 0 0 5px; /* Rounded corners on the top right and bottom right side */
+}
+
+#mySidenav .a {
+  position: absolute; /* Position them relative to the browser window */
+  left: -80px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
+
+#mySidenav .a:hover {
+  left: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+#mySidenav .aa:hover {
+  right: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+/* The about link: 20px from the top with a green background */
+#about {
+  font-family: "Cookie", Helvetica, sans-serif;
+  font-size: 24px; 
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+  top: 80px;
+  background-color: #4CAF50;
+}
+
+#home {
+  font-size: 24px; 
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+  font-family: "Cookie", Helvetica, sans-serif;
+  top: 20px;
+  background-color: #2196F3; /* Blue */
+}
+
+#contact {
+  font-size: 24px; 
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+  font-family: "Cookie", Helvetica, sans-serif;
+  top: 140px;
+  background-color: #555 /* Light Black */
+}
+
+#login {
+  font-size: 24px; 
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+  font-family: "Cookie", Helvetica, sans-serif;
+  top: 200px;
+  background-color: #043927 /* Light Black */
+}
+
+#sc {
+  font-size: 24px; 
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+  font-family: "Cookie", Helvetica, sans-serif;
+  top: 260px;
+  background-color: #8d021f /* Light Black */
+}
+
+#logout {
+  font-size: 24px; 
+  text-shadow: 4px 4px 0px rgba(0,0,0,0.1); 
+  font-family: "Cookie", Helvetica, sans-serif;
+  top: 320px;
+  background-color: #111 /* Light Black */
+}
+
+
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.container2 {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.image {
+  width:200px;
+  height:200px;
+  display: block;
+}
+
+.Myimage1 {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  border-radius: 20px;
+   filter: blur(0.6px);
+}
+
+.text {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+h3 { 
+  color: black;
+  display: inline-block;
+  font-family: "Brush Script MT", cursive; 
+  font-size: 30px; 
+  font-weight: 700; 
+  line-height: 15.4px; 
+}
+
+
+.direction {
+  text-decoration:none;
+  color: black;
+}
+
+/* Change the link color to #111 (black) on hover */
+li:hover, .navi:hover{
+  text-decoration:none;
+  background-color: white;
+  color: black;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+} 	
+
+h1 { 
+  font-family: 'Enriqueta', arial, serif;
+  line-height: 1.25; 
+  margin: 0 0 10px; 
+  font-size: 40px; 
+  font-weight: bold;
+  color: black; 
+}
+
+h2 {
+  color: black;
+}
+
+p { 
+  text-align: justify; 
+  font-family: "Helvetica Neue",Arial,sans-serif; 
+  font-size: 16px; 
+  font-weight: 300; 
+  line-height: 1.5; 
+  margin-bottom: 15px; 
+}
+
+.container2 {
+  display: inline-block;
+  position: relative;
+  left: 10%;
+  width: 50%;
+} 
+
+.text2 {
+  color: white;
+  text-align: justify;
+  font-size: 16px; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: -30%;
+  bottom: -30%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+    .services {
+        text-align: center;
+        position: absolute;
+        top: 95%;
+        left: 50%;
+        width: 1200px;
+        height: 500px;
+        transform: translate(-50%, -50%);
+        margin: 7em auto;
+        border-radius: 1.5em;
+    }
+
+    .vision {
+        text-align: center;
+        position: absolute;
+        top: 23%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background-color: #FFFFFF;
+        width: fill;
+        height: fill;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        padding: 30px;
+    }
+
+    .vision2 {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background-color: #FFFFFF;
+        width: fill;
+        height: fill;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        padding: 30px;
+    }
+
+    .vision1 {
+            text-align: center;
+        position: absolute;
+        top: 75%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        width: 25%;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #4479BA;
+    color: #FFF;
+    padding: 8px 12px;
+    text-decoration: none;
+    }
+
+    .vision2:hover, .vision1:hover {
+        box-shadow: 10px 10px 5px grey;
+    }
+
+
+
+    .main1 {
+      text-align: center;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background-color: #FFFFFF;
+        width: 700px;
+        height: 300px;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+        padding: 30px;
+    }
+
+    .main1:hover {
+        box-shadow: 10px 10px 5px grey;
+    }
+
+    .main {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        background-color: #FFFFFF;
+        width: 400px;
+        height: 400px;
+        margin: 7em auto;
+        border-radius: 1.5em;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+    
+    .sign {
+        text-align: center;
+        padding-top: 40px;
+        color: #8C55AA;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: bold;
+        font-size: 23px;
+    }
+    
+    .un {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+    
+    form.form1 {
+        padding-top: 40px;
+    }
+    
+    .pass {
+            width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+    
+   
+    .un:focus, .pass:focus {
+        border: 2px solid rgba(0, 0, 0, 0.18) !important;
+        
+    }
+    
+    .submit {
+      cursor: pointer;
+        border-radius: 5em;
+        color: #fff;
+        background: linear-gradient(to right, #9C27B0, #E040FB);
+        border: 0;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 35%;
+        font-size: 13px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+    
+    .forgot {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #E1BEE7;
+        padding-top: 15px;
+    }
+    
+    a {
+        text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+        color: #E1BEE7;
+        text-decoration: none
+    }
+    
+    @media (max-width: 600px) {
+        .main {
+            border-radius: 0px;
+        }
+
+
+
+</style>

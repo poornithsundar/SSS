@@ -1,0 +1,207 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% csrf_token %}
+{% block content %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="{% static '/style.css' %}">
+</head>
+<body id="body">
+    <div id="container">
+        <div id="start">Start Quiz!</div>
+        <div id="quiz" style="display: none">
+            <div id="question"></div>
+            <div id="choices">
+                <div class="choice" id="A" onclick="checkAnswer('A')"></div>
+                <div class="choice" id="B" onclick="checkAnswer('B')"></div>
+                <div class="choice" id="C" onclick="checkAnswer('C')"></div>
+                <div class="choice" id="D" onclick="checkAnswer('D')"></div>
+            </div>
+            <div id="timer">
+                <div id="counter"></div>
+                <div id="btimeGauge"></div>
+                <div id="timeGauge"></div>
+            </div>
+            <div id="progress"></div>
+        </div>
+        <div id="scoreContainer" style="display: none"></div>
+    </div>
+    <form method="post" action="/add_data/">
+        {% csrf_token %}
+        <input id="jsk" name="data" placeholder="enter JSON" style="display: none">
+        <input id="scr" name="score" placeholder="enter JSON" style="display: none">
+        <input id="tm" name="time" placeholder="enter JSON" style="display: none">
+        <input class="button" type="submit" value="OK">
+    </form>
+<script>
+        // select all elements
+var elem = document.getElementById("body");
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const choiceD = document.getElementById("D");
+const counter = document.getElementById("counter");
+const timeGauge = document.getElementById("timeGauge");
+const progress = document.getElementById("progress");
+const scoreDiv = document.getElementById("scoreContainer");
+const scr = document.getElementById("scr");
+const jk = document.getElementById("jsk");
+const tm = document.getElementById("tm");
+
+// create our questions
+var questions = [
+  {% for i in questions %}
+  {
+    question: "{{i.question}}",
+    choiceA: "{{i.option1}}",
+    choiceB: "{{i.option2}}",
+    choiceC: "{{i.option3}}",
+    choiceD: "{{i.option4}}",
+    correctans: "{{i.correct_option}}",
+  },
+  {% endfor %}
+  ];
+// create some variables
+
+const lastQuestion = questions.length - 1;
+let runningQuestion = 0;
+let count = 1;
+const questionTime = 15; // 10s
+const gaugeWidth = 150; // 150px
+const gaugeUnit = gaugeWidth / questionTime;
+let TIMER;
+let score = 0;
+let time = 0;
+
+// render a question
+function renderQuestion(){
+    let q = questions[runningQuestion];
+    question.innerHTML = "<p>"+ q.question +"</p>";
+    choiceA.innerHTML = q.choiceA;
+    choiceB.innerHTML = q.choiceB;
+    choiceC.innerHTML = q.choiceC;
+    choiceD.innerHTML = q.choiceD;
+}
+
+start.addEventListener("click",startQuiz);
+document.addEventListener('fullscreenchange', exitHandler);
+document.addEventListener('webkitfullscreenchange', exitHandler);
+document.addEventListener('mozfullscreenchange', exitHandler);
+document.addEventListener('MSFullscreenChange', exitHandler);
+
+// start quiz
+function startQuiz(){
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+    start.style.display = "none";
+    renderCounter();
+    renderQuestion();
+    quiz.style.display = "block";
+    renderProgress();
+    TIMER = setInterval(renderCounter,1500); // 1000ms = 1s
+}
+
+function exitHandler() {
+    if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+        window.location="/countdown";
+        alert("You are not allowed to exit fullscreen during Quiz time");
+        }
+}  
+
+// render progress
+function renderProgress(){
+    for(let qIndex = 0; qIndex <= lastQuestion; qIndex++){
+        progress.innerHTML += "<div class='prog' id="+ qIndex +"></div>";
+    }
+}
+
+// counter render
+
+function renderCounter(){
+    if(count <= questionTime){
+        counter.innerHTML = count;
+        timeGauge.style.width = count * gaugeUnit + "px";
+        count++
+    }else{
+        questions[runningQuestion]["time"]=count;
+        time+=count;
+        count = 1;
+        // change progress color to red
+        document.getElementById(runningQuestion).style.backgroundColor = "red";
+        if(runningQuestion < lastQuestion){
+            runningQuestion++;
+            renderQuestion();
+        }else{
+            // end the quiz and show the score
+            clearInterval(TIMER);
+            scoreRender();
+        }
+    }
+}
+
+// checkAnwer
+
+function checkAnswer(answer){
+    let a = (answer=='A') ? questions[runningQuestion].choiceA :
+              (answer=='B') ? questions[runningQuestion].choiceB :
+              (answer=='C') ? questions[runningQuestion].choiceC :
+              questions[runningQuestion].choiceD ;
+    questions[runningQuestion]['choosen option']=a;
+    if( a == questions[runningQuestion].correctans){
+        // answer is correct
+        score++;
+        // change progress color to green
+    }
+    document.getElementById(runningQuestion).style.backgroundColor = "#0f0";
+    questions[runningQuestion]["time"]=count;
+    time+=count;
+    count = 1;
+    if(runningQuestion < lastQuestion){
+        runningQuestion++;
+        renderQuestion();
+    }else{
+        // end the quiz and show the score
+        clearInterval(TIMER);
+        scoreRender();
+    }
+}
+
+// score render
+function scoreRender(){
+    scoreDiv.style.display = "block";
+    
+    // calculate the amount of question percent answered by the user
+    let scorePerCent = Math.round(100 * score/questions.length);
+    questions['score']=scorePerCent;
+    // choose the image based on the scorePerCent
+    let img = (scorePerCent >= 80) ? "{% static '/top1.png' %}" :
+              (scorePerCent >= 60) ? "{% static '/top2.png' %}" :
+              (scorePerCent >= 40) ? "{% static '/center.png' %}" :
+              (scorePerCent >= 20) ? "{% static '/bottom2.png' %}" :
+              "{% static '/bottom1.png' %}";
+    
+    scoreDiv.innerHTML = "<img style='width:50px;height:50px' src="+ img +">";
+    scoreDiv.innerHTML += "<p> CLICK OK </p>";
+    console.log(questions);
+    jk.value=JSON.stringify(questions);
+    scr.value=scorePerCent;
+    tm.value=time;
+}
+</script>
+</body>
+</html>
+
+{% endblock %} 

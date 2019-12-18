@@ -1,0 +1,40 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+{% include "nav.html" %}
+<head>
+<title>Sign in</title>
+</head>
+<body>
+  <img class="Myimage1" src = "{% static '/ser.png' %}"/>
+  <div class="main">
+    <p class="sign" align="center">Sign in</p>
+    <form class="form1" method="POST">
+        {% csrf_token %}{{forms.post}}
+	    <input class="un" type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" placeholder="Username">
+	    <input class="pass" type="password" name="password" autocomplete="current-password" required="" id="id_password" placeholder="Password">
+	    <button style="background-color:#F4EB16; color:white" onclick="myFunction()" class="submit" type="submit">Login</button>
+    </form>
+<script>
+function myFunction() {
+  try{
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+catch(exception){
+  
+}
+}
+</script>
+</body>
+<body onload="myFunction()">
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div id="snackbar"><li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li></div>
+    {% endfor %}
+</ul>
+{% endif %} 
+</body>
+{% endblock %}
